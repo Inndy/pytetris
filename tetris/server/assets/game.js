@@ -53,7 +53,7 @@ Vue.component('row', {
 
 Vue.component('board', {
 	template: '#board-t',
-	props: ['board', 'theme']
+	props: ['board', 'theme', 'name']
 })
 
 new Vue({
