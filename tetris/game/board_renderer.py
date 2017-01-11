@@ -31,7 +31,7 @@ class TextRenderer(Renderer):
         lines = [self.PREFIX]
         y, x = self.board.current_block_pos
 
-        for i, row in enumerate(self.board.board):
+        for i, row in enumerate(self.board.get_board_copy()):
             line = self.ROW_PREFIX
             for j, block in enumerate(row):
                 p = self.FIXED_BLOCK if block else self.SPACE
@@ -68,7 +68,7 @@ class JSONRenderer(Renderer):
         super().__init__(*args)
 
     def render(self):
-        board = deepcopy(self.board.board)
+        board = self.board.get_board_copy()
         curr_block = self.board.current_block
         y, x = self.board.current_block_pos
 

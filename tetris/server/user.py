@@ -18,12 +18,12 @@ class User(object):
         self.renderer = JSONRenderer(self.board)
         self.board_lock = Semaphore(1)
         self.op_map = {
-            'BOOM': self.board.down,
-            'MOVE_LEFT': functools.partial(self.board.move, -1),
-            'MOVE_RIGHT': functools.partial(self.board.move, 1),
+            'BOOM': self.board.deposit,
+            'MOVE_LEFT': functools.partial(self.board.move, 'left'),
+            'MOVE_RIGHT': functools.partial(self.board.move, 'right'),
             'ROTATE_RIGHT': functools.partial(self.board.rotate, 'right'),
             'ROTATE_LEFT': functools.partial(self.board.rotate, 'left'),
-            'DOWN': self.board.next_tick
+            'DOWN': self.board.down
         }
 
     def emit(self, event, data, *args, **kwargs):
