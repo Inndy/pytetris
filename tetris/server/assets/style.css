@@ -1,15 +1,13 @@
 .game-board {
-	padding-left: 1px;
-	padding-top: 1px;
+	--padding-left: 1px;
+	--padding-top: 1px;
 }
 .game-row {
 	line-height: 0;
 }
 .game-block {
 	display: inline-block;
-	height: 12px;
-	width: 12px;
-	border: 1px solid #666;
-	margin-left: -1px;
-	margin-top: -1px;
+	--border: 1px solid #666;
+	--margin-left: -1px;
+	--margin-top: -1px;
 }

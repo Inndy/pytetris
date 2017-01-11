@@ -64,7 +64,7 @@
 
       <!-- gameboard -->
       <div class="game-board" v-if="board_state">
-        <board :board="board_state.board"></board>
+        <board :board="board_state.board" :theme="themes[curr_theme]"></board>
       </div>
 
       <!-- we only show last 8 messages -->
@@ -80,18 +80,18 @@
 
   <template id="board-t">
     <div class="game-board">
-      <row v-for="row in board" :row="row"></row>
+      <row v-for="row in board" :row="row" :theme="theme"></row>
     </div>
   </template>
 
   <template id="row-t">
     <div class="game-row"><!--
-   --><block v-for="block in row" :block="block"></block><!--
+   --><block v-for="block in row" :block="block" :theme="theme"></block><!--
  --></div>
   </template>
 
   <template id="block-t">
-    <div class="game-block" :style="{'background': background}"></div>
+    <div class="game-block" :style="{'background': background, 'height': theme.size, 'width': theme.size}"></div>
   </template>
 
   <!-- vuejs app code -->

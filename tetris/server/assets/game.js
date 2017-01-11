@@ -1,5 +1,24 @@
 Vue.use(VueSocketio.default, 'http://' + document.domain + ':' + location.port + '/game')
 
+var THEMES = {
+	minecraft: {
+		size: '16px',
+		blocks: {
+			DEFAULT: 'url("assets/textures/minecraft/bedrock.png")',
+			1: 'url("assets/textures/minecraft/grass_side.png")',
+			2: 'url("assets/textures/minecraft/diamond_ore.png")',
+		}
+	},
+	plain: {
+		size: '16px',
+		blocks: {
+			DEFAULT: '#ddd',
+			1: '#3fe',
+			2: '#69f'
+		}
+	}
+}
+
 var DEFAULT_DATA = function (msg) {
 	return {
 		messages: msg || [],
@@ -11,36 +30,30 @@ var DEFAULT_DATA = function (msg) {
 		username_set: false,
 		board_state: '',
 		is_owner: false,
-		gameover: false
+		gameover: false,
+		themes: THEMES,
+		curr_theme: 'plain'
 	}
 }
 
 Vue.component('block', {
 	template: '#block-t',
-	props: ['block'],
+	props: ['block', 'theme'],
 	computed: {
 		background: function () {
-			switch(this.block) {
-				case 1:
-					return '#a33'
-				case 2:
-					return '#3a3'
-				case 'O':
-					return '#39f'
-			}
-			return ''
+			return this.theme.blocks[this.block] || this.theme.blocks.DEFAULT || ''
 		}
 	}
 })
 
 Vue.component('row', {
 	template: '#row-t',
-	props: ['row']
+	props: ['row', 'theme']
 })
 
 Vue.component('board', {
 	template: '#board-t',
-	props: ['board']
+	props: ['board', 'theme']
 })
 
 new Vue({
