@@ -26,6 +26,8 @@ class Game(object):
                 user.board.next_tick()
                 user.report_state()
             if user.board.is_gameover():
+                self.broadcast('User %s dead, gameover!' % user.name)
+                self.emit('game over', None)
                 return False
 
         return True

@@ -94,6 +94,7 @@ new Vue({
 		},
 
 		'game over': function () {
+			alert('Game Over!')
 			this.gameover = true
 		}
 	},
