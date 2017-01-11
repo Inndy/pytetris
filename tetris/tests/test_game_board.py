@@ -241,5 +241,5 @@ class TestBoardHelperFunctions(unittest.TestCase):
         self.assertEqual(self.gameboard._board[-3], top)
 
     def test_board_api(self):
-        self.assertEqual(self.gameboard.board, self.gameboard._board)
+        self.assertEqual(self.gameboard.get_board_copy(), self.gameboard._board)
 

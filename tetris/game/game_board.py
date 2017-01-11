@@ -145,8 +145,7 @@ class GameBoard(object):
         x, y = pos
         return self._board[x][y]
 
-    @property
-    def board(self):
+    def get_board_copy(self):
         return deepcopy(self._board)
 
     def clear(self):
