@@ -41,7 +41,9 @@ class User(object):
             self.report_state()
 
     def report_state(self):
-        self.emit('board state', self.renderer.render())
+        state = self.renderer.render()
+        self.emit('board state', state)
+        return state
 
     def __repr__(self):
         return 'User(sid=%r, game=%r, name=%r, board=%r)' % (

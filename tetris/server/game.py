@@ -21,14 +21,23 @@ class Game(object):
         self.sio.emit(event, data, *args, room=self.room_id, namespace='/game', **kwargs)
 
     def work(self): # background worker
+        boards = []
         for sid, user in self.players.items():
             with user.board_lock:
                 user.board.next_tick()
-                user.report_state()
+                state = user.report_state()
+            boards.append({
+                'sid': user.sid,
+                'name': user.name,
+                'state': state
+            })
             if user.board.is_gameover():
                 self.broadcast('User %s dead, gameover!' % user.name)
                 self.emit('game over', None)
                 return False
+
+        boards.sort(key=lambda x: x['sid'])
+        self.emit('room board state', boards)
 
         return True
 

@@ -19,10 +19,12 @@ var THEMES = {
 	}
 }
 
+var UID = ''
+
 var DEFAULT_DATA = function (msg) {
 	return {
 		messages: msg || [],
-		uid: '',
+		uid: UID,
 		join_room_id: '',
 		room_id: '',
 		joined_room: false,
@@ -32,7 +34,8 @@ var DEFAULT_DATA = function (msg) {
 		is_owner: false,
 		gameover: false,
 		themes: THEMES,
-		curr_theme: 'plain'
+		curr_theme: 'plain',
+		others_board: []
 	}
 }
 
@@ -76,7 +79,7 @@ new Vue({
 	sockets: {
 		connect: function () { this.msg('Connected'); this.reset() },
 		disconnect: function () { this.msg('Disconnected') },
-		'user id': function (id) { this.uid = id },
+		'user id': function (id) { this.uid = UID = id },
 
 		message: function (msg) {
 			this.msg(msg)
@@ -91,6 +94,10 @@ new Vue({
 
 		'board state': function (state) {
 			this.board_state = state
+		},
+
+		'room board state': function (state) {
+			this.others_board = state
 		},
 
 		'game over': function () {

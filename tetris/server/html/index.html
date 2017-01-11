@@ -63,10 +63,13 @@
       </div>
 
       <!-- gameboard -->
-      <div class="game-board" v-if="board_state">
+      <div class="game-boards" v-if="board_state">
         <p></p>
         <board :board="board_state.board" :theme="themes['minecraft']" name="You"></board>
-        <board :board="board_state.board" :theme="themes[curr_theme]" name="2"></board>
+
+        <board v-for="user in others_board" :board="user.state.board"
+               v-if="user.sid != uid" :theme="themes[curr_theme]"
+               :name="user.name"></board>
       </div>
 
       <!-- we only show last 8 messages -->
